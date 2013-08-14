@@ -23,9 +23,7 @@
     [super viewDidLoad];
     [self addSwipeGestures];
     commands = [NSArray arrayWithObjects:@"Swipe left",@"Swipe right",@"Swipe up",@"Swipe down", nil];
-    index = arc4random() % 4;
-    commandLabel.text = [NSString stringWithFormat:@"%@",commands[index]];
-
+    [self pickAndDisplayCommand];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -55,20 +53,56 @@
 
 - (void)handleSwipeUpFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped up");
+    if ([commands[index] isEqual: @"Swipe up"]) {
+        NSLog(@"you win!");
+        [self pickAndDisplayCommand];
+
+    }
+    else{
+        NSLog(@"you lose!");
+    }
 }
 
 - (void)handleSwipeDownFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped down");
+    if ([commands[index] isEqual: @"Swipe down"]) {
+        NSLog(@"you win!");
+        [self pickAndDisplayCommand];
+
+    }
+    else{
+        NSLog(@"you lose!");
+    }
 }
 
 - (void)handleSwipeLeftFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped left");
+    if ([commands[index] isEqual: @"Swipe left"]) {
+        NSLog(@"you win!");
+        [self pickAndDisplayCommand];
+
+    }
+    else{
+        NSLog(@"you lose!");
+    }
 }
 
 - (void)handleSwipeRightFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped right");
+    if ([commands[index] isEqual: @"Swipe right"]) {
+        NSLog(@"you win!");
+        [self pickAndDisplayCommand];
+
+    }
+    else{
+        NSLog(@"you lose!");
+    }
 }
 
+-(void)pickAndDisplayCommand{
+    index = arc4random() % 4;
+    commandLabel.text = [NSString stringWithFormat:@"%@",commands[index]];
 
+}
 
 @end
