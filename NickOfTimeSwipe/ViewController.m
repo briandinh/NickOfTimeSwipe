@@ -11,6 +11,7 @@
 @interface ViewController (){
     NSArray *commands;
     int index;
+    __weak IBOutlet UILabel *commandLabel;
 }
 
 @end
@@ -23,6 +24,7 @@
     [self addSwipeGestures];
     commands = [NSArray arrayWithObjects:@"Swipe left",@"Swipe right",@"Swipe up",@"Swipe down", nil];
     index = arc4random() % 4;
+    commandLabel.text = [NSString stringWithFormat:@"%@",commands[index]];
 
 }
 - (void)didReceiveMemoryWarning
