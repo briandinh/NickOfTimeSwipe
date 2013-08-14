@@ -9,8 +9,11 @@
 #import "ViewController.h"
 
 @interface ViewController (){
-    NSArray *commands;
+    NSArray *allCommands;
     int index;
+    NSString *indexString;
+    NSMutableArray *checkArray;
+    NSMutableArray *commandArray;
     __weak IBOutlet UILabel *commandLabel;
 }
 
@@ -22,7 +25,9 @@
 {
     [super viewDidLoad];
     [self addSwipeGestures];
-    commands = [NSArray arrayWithObjects:@"Swipe left",@"Swipe right",@"Swipe up",@"Swipe down", nil];
+    checkArray = [NSMutableArray arrayWithCapacity:2];
+    commandArray = [NSMutableArray arrayWithCapacity:2];
+    allCommands = [NSArray arrayWithObjects:@"Swipe left",@"Swipe right",@"Swipe up",@"Swipe down",@"Swipe left then right", @"Swipe left then up",@"Swipe left then left",@"Swipe left then down",nil];
     [self pickAndDisplayCommand];
 }
 - (void)didReceiveMemoryWarning
@@ -53,7 +58,7 @@
 
 - (void)handleSwipeUpFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped up");
-    if ([commands[index] isEqual: @"Swipe up"]) {
+    if ([allCommands[index] isEqual: @"Swipe up"]) {
         NSLog(@"you win!");
         [self pickAndDisplayCommand];
 
@@ -65,19 +70,19 @@
 
 - (void)handleSwipeDownFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped down");
-    if ([commands[index] isEqual: @"Swipe down"]) {
+    if ([allCommands[index] isEqual: @"Swipe down"]) {
         NSLog(@"you win!");
         [self pickAndDisplayCommand];
 
     }
-    else{
+    else {
         NSLog(@"you lose!");
     }
 }
 
 - (void)handleSwipeLeftFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped left");
-    if ([commands[index] isEqual: @"Swipe left"]) {
+    if ([allCommands[index] isEqual: @"Swipe left"]) {
         NSLog(@"you win!");
         [self pickAndDisplayCommand];
 
@@ -89,7 +94,7 @@
 
 - (void)handleSwipeRightFrom:(UIGestureRecognizer*)recognizer {
     NSLog(@"swiped right");
-    if ([commands[index] isEqual: @"Swipe right"]) {
+    if ([allCommands[index] isEqual: @"Swipe right"]) {
         NSLog(@"you win!");
         [self pickAndDisplayCommand];
 
@@ -101,8 +106,36 @@
 
 -(void)pickAndDisplayCommand{
     index = arc4random() % 4;
-    commandLabel.text = [NSString stringWithFormat:@"%@",commands[index]];
-
+    indexString = [NSString stringWithFormat:@"%i",index];
+    commandLabel.text = [NSString stringWithFormat:@"%@",allCommands[index]];
+    if (index == 1) {
+        [checkArray addObject:indexString];
+    }
+    if (index == 2) {
+        [checkArray addObject:indexString];
+    }
+    if (index == 3) {
+        [checkArray addObject:indexString];
+    }
+    if (index == 4) {
+        [checkArray addObject:indexString];
+    }
+    if (index == 5) {
+        [checkArray addObject:@"3"];
+        [checkArray addObject:@"4"];
+    }
+    if (index == 6) {
+        [checkArray addObject:@"3"];
+        [checkArray addObject:@"3"];
+    }
+    if (index == 7) {
+        [checkArray addObject:@"3"];
+        [checkArray addObject:@"2"];
+    }
 }
+
+
+//@"Swipe left then right", @"Swipe left then up",@"Swipe left then left",@"Swipe left then down"
+
 
 @end
