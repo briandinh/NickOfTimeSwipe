@@ -11,7 +11,6 @@
 @interface ViewController (){
     NSArray *allCommands;
     int index;
-    NSString *indexString;
     NSMutableArray *checkArray;
     NSMutableArray *commandArray;
     __weak IBOutlet UILabel *commandLabel;
@@ -27,7 +26,7 @@
     [self addSwipeGestures];
     checkArray = [[NSMutableArray alloc] init];;
     commandArray = [[NSMutableArray alloc] init];
-    allCommands = [NSArray arrayWithObjects:@"Swipe up",@"Swipe down",@"Swipe left",@"Swipe right",@"Swipe left then up", @"Swipe left then down",@"Swipe left then left",@"Swipe left then right",@"Swipe up then up", @"Swipe up then down",@"Swipe up then left",@"Swipe up then right",@"Swipe down then up", @"Swipe down then down",@"up down then left",@"Swipe down then right",@"Swipe right then up", @"Swipe right then down",@"up right then left",@"Swipe right then right",nil];
+    allCommands = [NSArray arrayWithObjects:@"Swipe up",@"Swipe down",@"Swipe left",@"Swipe right",@"Swipe left then up", @"Swipe left then down",@"Swipe left then left",@"Swipe left then right",@"Swipe up then up", @"Swipe up then down",@"Swipe up then left",@"Swipe up then right",@"Swipe down then up", @"Swipe down then down",@"Swipe down then left",@"Swipe down then right",@"Swipe right then up", @"Swipe right then down",@"Swipe right then left",@"Swipe right then right", @"Swipe anywhere but up", @"Swipe anywhere but down",@"Swipe anywhere but left",@"Swipe anywhere but right", nil];
     [self pickAndDisplayCommand];
     NSLog(@"%@,%@",checkArray, commandArray);
 }
@@ -59,72 +58,134 @@
 
 - (void)handleSwipeUpFrom:(UIGestureRecognizer*)recognizer {
     [checkArray addObject:@"0"];
-    if ([checkArray isEqualToArray:commandArray]) {
-        NSLog(@"youwin!");
-        [self pickAndDisplayCommand];
+    
+    if (index < 20) {
+        if ([checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+        }
+
     }
-    if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
-        NSLog(@"youlose!");
-        [self pickAndDisplayCommand];
+    
+    else {
+        if (![checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        else{
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+
+        }
     }
+    
 }
 
 - (void)handleSwipeDownFrom:(UIGestureRecognizer*)recognizer {
     [checkArray addObject:@"1"];
-    if ([checkArray isEqualToArray:commandArray]) {
-        NSLog(@"youwin!");
-        [self pickAndDisplayCommand];
+    if (index < 20) {
+        if ([checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+        }
+        
     }
-    if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
-        NSLog(@"youlose!");
-        [self pickAndDisplayCommand];
+    
+    else {
+        if (![checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        else{
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+            
+        }
     }
+    
 }
 
 - (void)handleSwipeLeftFrom:(UIGestureRecognizer*)recognizer {
     [checkArray addObject:@"2"];
-    if ([checkArray isEqualToArray:commandArray]) {
-        NSLog(@"youwin!");
-        [self pickAndDisplayCommand];
+    if (index < 20) {
+        if ([checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+        }
+        
     }
-    if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
-        NSLog(@"youlose!");
-        [self pickAndDisplayCommand];
+    
+    else {
+        if (![checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        else{
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+            
+        }
     }
-
+    
 }
 
 - (void)handleSwipeRightFrom:(UIGestureRecognizer*)recognizer {
     [checkArray addObject:@"3"];
-    if ([checkArray isEqualToArray:commandArray]) {
-        NSLog(@"youwin!");
-        [self pickAndDisplayCommand];
+    if (index < 20) {
+        if ([checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+        }
+        
     }
-    if ((checkArray.count == 2) && (![commandArray isEqualToArray:checkArray])) {
-        NSLog(@"youlose!");
-        [self pickAndDisplayCommand];
+    
+    else {
+        if (![checkArray isEqualToArray:commandArray]) {
+            NSLog(@"youwin!");
+            [self pickAndDisplayCommand];
+        }
+        else{
+            NSLog(@"youlose!");
+            [self pickAndDisplayCommand];
+            
+        }
     }
+    
 }
 
 -(void)pickAndDisplayCommand{
     [commandArray removeAllObjects];
     [checkArray removeAllObjects];
     
-    index = arc4random() % 20;
-    
-    indexString = [NSString stringWithFormat:@"%i",index];
+    index = arc4random() % 24;
     commandLabel.text = [NSString stringWithFormat:@"%@",allCommands[index]];
     if (index == 0) {
-        [commandArray addObject:indexString];
+        [commandArray addObject:@"0"];
     }
     if (index == 1) {
-        [commandArray addObject:indexString];
+        [commandArray addObject:@"1"];
     }
     if (index == 2) {
-        [commandArray addObject:indexString];
+        [commandArray addObject:@"2"];
     }
     if (index == 3) {
-        [commandArray addObject:indexString];
+        [commandArray addObject:@"3"];
     }
     if (index == 4) {
         [commandArray addObject:@"2"];
@@ -186,8 +247,20 @@
         [commandArray addObject:@"3"];
         [commandArray addObject:@"2"];
     }
-    if (index == 119) {
+    if (index == 19) {
         [commandArray addObject:@"3"];
+        [commandArray addObject:@"3"];
+    }
+    if (index == 20) {
+        [commandArray addObject:@"0"];
+    }
+    if (index == 21) {
+        [commandArray addObject:@"1"];
+    }
+    if (index == 22) {
+        [commandArray addObject:@"2"];
+    }
+    if (index == 23) {
         [commandArray addObject:@"3"];
     }
 }
